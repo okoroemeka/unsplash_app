@@ -1,38 +1,162 @@
-.App {
-  text-align: center;
+.app {
+  width: 100vw;
+  min-height: 100vh;
+  overflow-y: scroll;
+  margin: 0 auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app__header {
+  width: 100%;
+  height: 20rem;
+  background-color: #e6eae7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.search__container {
+  width: 70%;
+  height: 2rem;
+  display: flex;
+  padding: 0.5rem;
+  border-radius: 7px;
+  background-color: #ffffff;
 }
 
-.App-header {
-  background-color: #282c34;
+.search__image__container {
+  width: 2rem;
+  height: 100%;
+}
+
+.search__image {
+  height: 100%;
+  width: 100%;
+}
+
+.search__input {
+  color: #5d5d5d;
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: calc(100% - 2rem);
+  height: 100%;
+  padding: 0 0.5rem;
+  border: none;
+  outline: none;
+}
+
+.images__container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* .images__wrapper {
+  width: 65%;
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+  position: absolute;
+  top: -6rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: red;
+} */
+
+.images__wrapper {
+  width: 65%;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: absolute;
+  top: -6rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  /* background-color: red; */
+}
+
+/* .image__card {
+  grid-column: 1 / 2;
+  grid-row: 1/3;
+  background-color: blue;
+  border-radius: 7px;
+  position: relative;
+} */
+
+.image__card {
+  width: 32%;
+  height: auto;
+  border-radius: 7px;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo {
+  width: 100%;
+  min-height: auto;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.details,
+.modal__card__details {
+  /* height: 3rem; */
+  padding-left: 2rem;
+  padding-bottom: 1.5rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+}
+
+.modal__card__details {
+  height: 3rem;
+  background-color: #ffffff;
+}
+
+/* .modal__card {
+  width: 50%;
+  height: 30rem;
+  border-radius: 8px;
+  position: relative;
+} */
+
+.name,
+.location {
+  color: #dfd5d5;
+  text-transform: capitalize;
+  font-weight: normal;
+  margin: 0.3rem 0;
+}
+
+.name__modal {
+  color: #000000;
+}
+
+.location__modal {
+  color: gray;
+}
+
+.modal_container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cancel__button {
+  color: #d8d7d7;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  z-index: 3;
+  right: 3rem;
+  top: 3rem;
 }
