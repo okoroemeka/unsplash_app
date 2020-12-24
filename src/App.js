@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Modal from './components/Modal';
 import ImageCard from './components/ImageCard';
 import Header from './components/Header';
-import SearchIcon from './Assets/Search_Icon.png';
+import useDebounce from './components/hooks/Debounce';
 import axios from './utils/axios';
 import './App.css';
 
@@ -14,6 +14,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [errorMessge, setErrorMessage] = useState('');
 
+  const debouncedSearchTerm = useDebounce(searchKeyWord, 500);
+
   const toggleModal = () => {
     setShowModal(!showModal);
   };
@@ -23,22 +25,28 @@ function App() {
     toggleModal();
   };
 
-  useEffect(() => {
-    const handleSearch = async () => {
-      try {
-        setLoading(true);
-        setErrorMessage('');
+  const handleSearch = useCallback(async () => {
+    try {
+      setLoading(true);
+      setErrorMessage('');
+      const newPhotos = await axios.get(`?query=${debouncedSearchTerm}`);
+      setPhotos(newPhotos.data);
+    } catch (error) {
+      console.log('error :>> ', error);
+      setErrorMessage('an error occured');
+    }
+    setLoading(false);
+  }, [debouncedSearchTerm]);
 
-        const newPhotos = await axios.get(`?query=${searchKeyWord}`);
-        setPhotos(newPhotos.data);
-      } catch (error) {
-        console.log('error :>> ', error);
-        setErrorMessage('an error occured');
-      }
-      setLoading(false);
-    };
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      handleSearch();
+    }
+  }, [debouncedSearchTerm, handleSearch]);
+
+  useEffect(() => {
     handleSearch();
-  }, [searchKeyWord]);
+  }, [handleSearch]);
 
   return (
     <>
